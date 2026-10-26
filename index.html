@@ -6,11 +6,11 @@
 <meta name="theme-color" content="#1F5FBF">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Hierro">
+<meta name="apple-mobile-web-app-title" content="Fitty">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
-<title>Hierro</title>
+<title>Fitty</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
@@ -186,7 +186,7 @@ h2{font-family:var(--display);font-weight:700;font-size:1.35rem;margin:28px 0 10
   <!-- HOY -->
   <section class="screen" id="s-hoy">
     <div class="top">
-      <h1 class="wordmark">Hierro</h1>
+      <h1 class="wordmark">Fitty</h1>
       <button class="icon-btn" data-act="settings" aria-label="Ajustes">⚙︎</button>
     </div>
     <div id="hoy"></div>
@@ -240,7 +240,7 @@ h2{font-family:var(--display);font-weight:700;font-size:1.35rem;margin:28px 0 10
 <script>
 'use strict';
 /* =========================================================
-   HIERRO: registro de entrenos, marcas y días de gimnasio
+   FITTY: registro de entrenos, marcas y días de gimnasio
    Todo se guarda en tu móvil (localStorage). Nada sale de él.
    ========================================================= */
 
@@ -706,7 +706,7 @@ function exportCSV() {
   const rows = [['fecha', 'entreno', 'ejercicio', 'grupo', 'serie', 'kg', 'reps', '1rm_estimado'].join(';')];
   for (const w of [...S.workouts].sort((a, b) => a.start - b.start))
     for (const e of w.exercises) e.sets.forEach((s, i) => rows.push([w.date, q(w.name), q(ex(e.exId).name), ex(e.exId).group, i + 1, String(s.kg).replace('.', ','), s.reps, fmt(e1rm(s.kg, s.reps))].join(';')));
-  download(`hierro-entrenos-${dkey()}.csv`, '\ufeff' + rows.join('\n'), 'text/csv');
+  download(`fitty-entrenos-${dkey()}.csv`, '\ufeff' + rows.join('\n'), 'text/csv');
 }
 
 /* =========================================================
@@ -775,7 +775,7 @@ const actions = {
   },
   finish: finishWorkout,
   discard: () => { if (confirm('¿Descartar este entreno? Se perderán las series apuntadas.')) { S.active = null; ui.wkOpen = false; save(); renderAll(); } },
-  export: () => { download(`hierro-copia-${dkey()}.json`, JSON.stringify(S, null, 1), 'application/json'); toast('Copia exportada'); },
+  export: () => { download(`fitty-copia-${dkey()}.json`, JSON.stringify(S, null, 1), 'application/json'); toast('Copia exportada'); },
   import: () => $('#importFile').click(),
   csv: exportCSV,
   wipe: () => { if (confirm('¿Borrar todos tus entrenos, marcas y rutinas? Exporta una copia antes si quieres conservarlos.') && confirm('Última confirmación: se borrará todo.')) { S = fresh(); save(); closeSheet(); renderAll(); toast('Datos borrados'); } }
@@ -798,7 +798,7 @@ $('#importFile').addEventListener('change', async e => {
     if (!Array.isArray(d.workouts) || !Array.isArray(d.exercises)) throw new Error('formato');
     if (!confirm(`La copia tiene ${d.workouts.length} entrenos. Sustituirá los datos actuales. ¿Continuar?`)) return;
     S = migrate(d); ui.wkOpen = !!S.active; save(); closeSheet(); renderAll(); toast('Copia importada');
-  } catch (err) { toast('Ese archivo no es una copia de Hierro válida'); }
+  } catch (err) { toast('Ese archivo no es una copia de Fitty válida'); }
 });
 
 /* ---------- Dibujar todo ---------- */

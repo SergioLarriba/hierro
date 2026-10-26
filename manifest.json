@@ -1,6 +1,6 @@
 {
-  "name": "Hierro: registro de gimnasio",
-  "short_name": "Hierro",
+  "name": "Fitty: registro de gimnasio",
+  "short_name": "Fitty",
   "description": "Registra tus entrenos, tus marcas y los días que vas al gimnasio.",
   "lang": "es",
   "start_url": "./",
